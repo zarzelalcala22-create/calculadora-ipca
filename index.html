@@ -48,7 +48,7 @@
     <h1>Índice de Continuidad Ósea (ICO)</h1>
     <div class="subtitle">Calculadora Automatizada e Instrumento de Campo Abierto</div>
     
-    <!-- BLOQUE FIJO DE CONSULTA PARA EL INVESTIGADOR -->
+    <!-- GUÍA FIJA DE REFERENCIA DE GRADOS -->
     <div class="manual-box">
         <div class="manual-title">📋 Guía de Referencia para la Calificación de Grados</div>
         <div class="manual-grid">
@@ -89,11 +89,11 @@
         </div>
         <div class="form-group">
             <label for="numCortes">Confronta de cortes (c_i):</label>
-            <input type="number" id="numCortes" value="2" min="1" max="50" onchange="generarFilas()">
+            <input type="number" id="numCortes" value="2" min="1" max="50" oninput="generarFilas()" onchange="generarFilas()">
         </div>
     </div>
 
-    <!-- AQUÍ SE GENERAN AUTOMÁTICAMENTE LAS CASILLAS DE LA FÓRMULA -->
+    <!-- CONTENEDOR DONDE SE DIBUJAN LAS CELDAS DE MODIFICACIÓN -->
     <div id="contenedorCortes"></div>
     
     <div class="btn-group">
