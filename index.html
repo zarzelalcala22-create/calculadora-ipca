@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Probabilidad de Correspondencia Anatómica (IPCA)</title>
+    <title>Calculadora de Índice de Continuidad Ósea (ICO)</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 40px 20px; background-color: #f8f9fa; color: #212529; line-height: 1.5; }
-        .container { max-width: 750px; background: #ffffff; padding: 40px; margin: 0 auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #e9ecef; }
+        .container { max-width: 800px; background: #ffffff; padding: 40px; margin: 0 auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #e9ecef; }
         h1 { color: #1a252f; font-size: 24px; font-weight: 700; margin-top: 0; margin-bottom: 8px; border-bottom: 2px solid #f1f3f5; padding-bottom: 15px; }
-        .subtitle { color: #6c757d; font-size: 14px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .subtitle { color: #6c757d; font-size: 14px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        
+        /* Sección de Guía de Criterios */
+        .guia-box { background: #edf2f7; border: 1px solid #cbd5e0; border-radius: 8px; padding: 15px 20px; margin-bottom: 30px; font-size: 13px; color: #4a5568; }
+        .guia-title { font-weight: 700; color: #2d3748; margin-bottom: 8px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+        .guia-content { display: block; margin-top: 10px; }
+        .guia-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; border-top: 1px solid #cbd5e0; padding-top: 10px; }
+        .guia-col h4 { margin: 5px 0; color: #2b6cb0; font-size: 13px; }
+        .guia-col ul { padding-left: 15px; margin: 5px 0; }
+        
         .form-row { display: flex; gap: 20px; margin-bottom: 25px; }
         .form-group { flex: 1; display: flex; flex-direction: column; }
         label { margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #495057; }
         input[type="text"], input[type="number"], select { padding: 10px 14px; border: 1px solid #ced4da; border-radius: 6px; font-size: 15px; background-color: #ffffff; transition: border-color 0.15s ease-in-out; }
         input:focus, select:focus { border-color: #2b6cb0; outline: 0; }
         .corte-card { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
-        .corte-title { font-weight: 700; font-size: 15px; color: #2d3748; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .corte-title { font-weight: 700; font-size: 15px; color: #2d3748; margin-bottom: 15px; }
         .corte-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
         .btn-group { display: flex; gap: 15px; margin-top: 30px; margin-bottom: 30px; }
         button { flex: 1; padding: 12px 20px; border: none; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.15s ease-in-out; }
@@ -32,8 +41,47 @@
 <body>
 
 <div class="container">
-    <h1>Índice de Probabilidad de Correspondencia Anatómica (IPCA)</h1>
-    <div class="subtitle">Calculadora e Instrumento Pericial de Campo Abierto</div>
+    <h1>Índice de Continuidad Ósea (ICO)</h1>
+    <div class="subtitle">Calculadora Automatizada e Instrumento de Campo Abierto</div>
+    
+    <!-- Guía de Referencia de Grados fija en la interfaz -->
+    <div class="guia-box">
+        <div class="guia-title" onclick="toggleGuia()">
+            <span>📋 Manual de Referencia Escala ICO (Haz clic para ocultar/mostrar)</span>
+            <span id="guia-flecha">▼</span>
+        </div>
+        <div class="guia-content" id="guiaContenido">
+            <div class="guia-grid">
+                <div class="guia-col">
+                    <h4>V1: Coincidencia de Bordes</h4>
+                    <ul>
+                        <li><strong>Grado 3:</strong> Acoplamiento perfecto y hermético. Cero juego mecánico lateral.</li>
+                        <li><strong>Grado 2:</strong> Contacto firme, brechas localizadas o microlascados menores.</li>
+                        <li><strong>Grado 1:</strong> Ajuste inestable, contacto en puntos aislados, deslizamiento.</li>
+                        <li><strong>Grado 0:</strong> Incompatibilidad absoluta o destrucción del margen.</li>
+                    </ul>
+                </div>
+                <div class="guia-col">
+                    <h4>V2: Espesor Cortical (Vernier)</h4>
+                    <ul>
+                        <li><strong>Grado 3:</strong> Variación insignificante en puntos espejo (&le; 0.5 mm).</li>
+                        <li><strong>Grado 2:</strong> Discrepancia moderada (entre 0.6 mm y 1.0 mm).</li>
+                        <li><strong>Grado 1:</strong> Discrepancia sustancial (&gt; 1.0 mm) o deformación plástica.</li>
+                        <li><strong>Grado 0:</strong> Pérdida absoluta de corteza ósea, lectura imposible.</li>
+                    </ul>
+                </div>
+                <div class="guia-col">
+                    <h4>V3: Arquitectura Anatómica</h4>
+                    <ul>
+                        <li><strong>Grado 3:</strong> Alineación fluida de crestas, forámenes y estrías.</li>
+                        <li><strong>Grado 2:</strong> Rasgos concurrentes con ligera distorsión o desplazamiento.</li>
+                        <li><strong>Grado 1:</strong> Rasgos inconexos, trayectoria interrumpida de forma ambigua.</li>
+                        <li><strong>Grado 0:</strong> Destrucción tafonómica o trauma que borró el relieve.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="form-row">
         <div class="form-group">
@@ -41,15 +89,15 @@
             <input type="text" id="casoId" value="Caso-01">
         </div>
         <div class="form-group">
-            <label for="numCortes">Cantidad de Cortes Registrados (c_i):</label>
-            <input type="number" id="numCortes" value="5" min="1" max="50" onchange="generarFilas()">
+            <label for="numCortes">Confronta de cortes (c_i):</label>
+            <input type="number" id="numCortes" value="2" min="1" max="50" onchange="generarFilas()">
         </div>
     </div>
 
     <div id="contenedorCortes"></div>
     
     <div class="btn-group">
-        <button class="btn-primary" onclick="calcularIPCA()">Calcular Probabilidad</button>
+        <button class="btn-primary" onclick="calcularICO()">Calcular Probabilidad</button>
         <button class="btn-secondary" onclick="descargarCedula()">Descargar Cédula (.txt)</button>
     </div>
 
@@ -57,10 +105,22 @@
 </div>
 
 <script>
+function toggleGuia() {
+    const contenido = document.getElementById('guiaContenido');
+    const flecha = document.getElementById('guia-flecha');
+    if (contenido.style.display === 'none') {
+        contenido.style.display = 'block';
+        flecha.innerText = '▼';
+    } else {
+        contenido.style.display = 'none';
+        flecha.innerText = '▲';
+    }
+}
+
 function generarFilas() {
     const num = parseInt(document.getElementById('numCortes').value) || 1;
     const contenedor = document.getElementById('contenedorCortes');
-    contenedor.innerHTML = '<h3 style="font-size: 16px; margin-bottom: 15px; color: #4a5568;">Matriz de Criterios por Sección Ósea:</h3>';
+    contenedor.innerHTML = '<h3 style="font-size: 16px; margin-bottom: 15px; color: #4a5568;">Matriz de Criterios por Sección Ósea en Confronta:</h3>';
     
     for(let j=1; j<=num; j++) {
         contenedor.innerHTML += `
@@ -85,7 +145,7 @@ function generarFilas() {
     }
 }
 
-function calcularIPCA() {
+function calcularICO() {
     const numCortes = parseInt(document.getElementById('numCortes').value) || 1;
     let sumaTotal = 0;
     
@@ -98,55 +158,17 @@ function calcularIPCA() {
     }
     
     const idealPossible = numCortes * 9;
-    const ipca = (sumaTotal / idealPossible) * 100;
+    const ico = (sumaTotal / idealPossible) * 100;
     
     const resBox = document.getElementById('resultadoBox');
     resBox.style.display = 'block';
     resBox.className = 'result-box'; 
     
     let dictamen = "";
-    if (ipca >= 90) {
+    if (ico >= 90) {
         resBox.classList.add('result-high');
         dictamen = "CORRESPONDENCIA ANATÓMICA ALTAMENTE PROBABLE (Reasociación Concluyente)";
-    } else if (ipca >= 70) {
+    } else if (ico >= 70) {
         resBox.classList.add('result-med');
         dictamen = "CORRESPONDENCIA SUGESTIVA / COMPATIBILIDAD PARCIAL (Requiere pruebas complementarias)";
     } else {
-        resBox.classList.add('result-low');
-        dictamen = "EXCLUSIÓN DE CORRESPONDENCIA ANATÓMICA (Elementos Incompatibles)";
-    }
-    
-    resBox.innerHTML = `IPCA Resultante: ${ipca.toFixed(2)}%<br><span style="font-size:13px; font-weight:600; text-transform:uppercase; margin-top:5px; display:block;">Dictamen: ${dictamen}</span>`;
-    return ipca.toFixed(2);
-}
-
-function descargarCedula() {
-    const caso = document.getElementById('casoId').value;
-    const num = document.getElementById('numCortes').value;
-    const ipca = calcularIPCA();
-    
-    let texto = `==================================================\n`;
-    texto += ` CÉDULA FORENSE AUTOMÁTICA DE REGISTRO E INFORME (IPCA)\n`;
-    texto += `==================================================\n\n`;
-    texto += `Identificador del Caso / Expediente: ${caso}\n`;
-    texto += `Total de Secciones de Corte Evaluadas (c_i): ${num}\n`;
-    texto += `--------------------------------------------------\n`;
-    texto += `ÍNDICE IPCA FINAL OBTENIDO: ${ipca}%\n`;
-    
-    let dictamen = ipca >= 90 ? "CORRESPONDENCIA ANATÓMICA ALTAMENTE PROBABLE" : (ipca >= 70 ? "CORRESPONDENCIA SUGESTIVA" : "EXCLUSIÓN DE CORRESPONDENCIA");
-    texto += `DICTAMEN PRELIMINAR: ${dictamen}\n`;
-    texto += `--------------------------------------------------\n\n`;
-    texto += `Firma del Perito Antropólogo Responsable: ____________________\n`;
-    
-    const blob = new Blob([texto], {type: "text/plain;charset=utf-8"});
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `Cedula_IPCA_${caso}.txt`;
-    link.click();
-}
-
-generarFilas();
-</script>
-
-</body>
-</html>
